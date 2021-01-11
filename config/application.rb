@@ -33,5 +33,13 @@ module LakesideLiquorApi
     # Middleware like session, flash, cookies can be added back manually.
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
+
+    # config.action_dispatch.default_headers = {
+    #   'Access-Control-Allow-Origin' => '*',
+    #   'Access-Control-Expose-Headers' => 'Content-Range',
+    #   'Content-Range' => '* 0-24/100',
+    #   'Access-Control-Request-Method' => %w{GET POST PUT PATCH DELETE OPTIONS HEAD}.join(",")
+    # }
+    # config.hosts.clear
   end
 end
