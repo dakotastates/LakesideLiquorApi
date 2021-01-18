@@ -3,28 +3,22 @@ class Api::V1::RecipesController < ApplicationController
     before_action :find_recipe, only:[:show, :update, :destroy]
 
     def index
-           # if params[:user_id]
-           #     @recipes = Recipe.where(user_id: params[:user_id])
-           # else
-           #     @recipes = Recipe.all
-           # end
 
-           # render json: RecipeSerializer.new(@recipes).serialized_json
            @recipes = Recipe.all
            render json: @recipes
        end
 
-       def current_user_recipes
-          if logged_in?
-              @recipes = current_user.recipes
-              render json: @recipes
-
-          else
-              render json: {
-                  notice: "You don't have any recipes, yet."
-              }
-          end
-      end
+      #  def current_user_recipes
+      #     if logged_in?
+      #         @recipes = current_user.recipes
+      #         render json: @recipes
+      #
+      #     else
+      #         render json: {
+      #             notice: "You don't have any recipes, yet."
+      #         }
+      #     end
+      # end
 
       def show
          # @recipe = Recipe.find_by(id: params[:id])
@@ -70,7 +64,7 @@ class Api::V1::RecipesController < ApplicationController
     private
 
     def recipe_params
-      params.require(:recipe).permit( :id, :name, :author, :description, :source, :image_url, :instructions, :user_id)
+      params.require(:recipe).permit( :id, :name, :author, :description, :source, :image_url, :instructions, :user_id, ingredients_attributes: [:id, :name, :quantity, :unit, :recipe_id])
     end
 
     def find_recipe
